@@ -4,7 +4,7 @@ const log = console.log
 
 const getHtml = async () => {
     try {
-        return await axios.get("https://sofrano.com/product/list.html?cate_no=55")
+        return await axios.get("https://sofrano.com/product/list.html?cate_no=56")
     } catch (error) {
         console.error(error);
     }
@@ -12,13 +12,15 @@ const getHtml = async () => {
 
 export default async (req, res) => {
     const SOFRANO_SITE_ADDR = "https://sofrano.com/"
+    const ITEM_COUNT = 7
+    console.log(req.query.page)
 
     const result_list = await getHtml().then(html => {
         let ulList = [];
         const $ = cheerio.load(html.data);
         const $bodyList = $("div.ec-base-product ul").children("li.xans-record-")
-
-        $bodyList.each(function(i,elem){
+        
+        $bodyList.slice((req.query.page - 1) * ITEM_COUNT, req.query.page * ITEM_COUNT).each(function(i,elem){
             ulList[i] = {
                 avatar: $(this).find('div.add_thumb img').attr('src'),
                 title: $(this).find('div.add_thumb img').attr('alt'),
