@@ -15,7 +15,7 @@
     "cheerio": "^1.0.0-rc.3",
     "cross-env": "^5.2.1",
     "express": "^4.16.4",
-    "nuxt": "^2.0.0",
+    "nuxt": "^2.15.8",
     "vue-infinite-scroll": "^2.0.2"
   },
   "devDependencies": {
